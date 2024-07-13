@@ -1,0 +1,77 @@
+{
+	"name": "css-mate",
+	"displayName": "css-mate",
+	"description": "",
+	"version": "0.0.1",
+	"publisher": "anthhub",
+	"engines": {
+		"vscode": "^1.49.0"
+	},
+	"icon": "",
+	"categories": [
+		"Other"
+	],
+	"activationEvents": [
+		"onStartupFinished"
+	],
+	"main": "./client/out/extension",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/tongyuchan/vscode-example.git"
+	},
+	"contributes": {
+		"commands": [
+			{
+				"command": "css-mate.list_available",
+				"title": "list_available"
+			},
+			{
+				"command": "css-mate.replace_to_recommend",
+				"title": "replace_to_recommend"
+			}
+		],
+		"configuration": {
+			"type": "object",
+			"title": "css-mate",
+			"properties": {}
+		},
+		"snippets": [],
+		"keybindings": [],
+		"menus": {
+			"editor/context": []
+		}
+	},
+	"scripts": {
+		"postinstall": "cd client && npm install && cd ../server && npm install && cd ..",
+		"vscode:prepublish-todo": "npm run webpack",
+		"vscode:prepublish": "npm run clean && npm run compile && webpack --mode production --config ./client/webpack.config.js",
+		"webpack": "npm run clean && webpack --mode production --config ./client/webpack.config.js & webpack --mode production --config ./server/webpack.config.js",
+		"clean": "rimraf client/out && rimraf server/out",
+		"compile": "tsc -b",
+		"lint": "eslint src --ext ts",
+		"watch": "tsc -b -w",
+		"pretest": "npm run compile && npm run lint",
+		"test": "node ./out/test/runTest.js"
+	},
+	"devDependencies": {
+		"@types/glob": "^7.1.3",
+		"@types/mocha": "^8.0.0",
+		"@types/node": "^14.0.27",
+		"@types/vscode": "^1.49.0",
+		"@typescript-eslint/eslint-plugin": "^3.8.0",
+		"@typescript-eslint/parser": "^3.8.0",
+		"eslint": "^7.6.0",
+		"glob": "^7.1.6",
+		"merge-options": "^2.0.0",
+		"mocha": "^8.0.1",
+		"rimraf": "^3.0.2",
+		"ts-loader": "^6.2.1",
+		"typescript": "^3.8.3",
+		"vscode-test": "^1.4.0",
+		"webpack": "^4.44.1",
+		"webpack-cli": "^3.3.12"
+	},
+	"dependencies": {
+		"sast": "^0.8.1"
+	}
+}
